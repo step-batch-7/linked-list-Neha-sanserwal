@@ -54,6 +54,20 @@ Status add_to_start(List_ptr list, int value)
   return Success;
 }
 
+Status remove_from_start(List_ptr list)
+{
+  if (!list->head)
+  {
+    return Failure;
+  }
+  Node_ptr p_walk = list->head;
+  list->head = p_walk->next;
+  list->count = list->count - 1;
+  free(p_walk);
+  Status status = Success;
+  return Success;
+}
+
 void display(List_ptr list)
 {
   Node_ptr p_walk = list->head;
