@@ -10,6 +10,7 @@ int main(void)
 {
   char option;
   int value;
+  Status status;
   List_ptr list = create_list();
   printOptions();
   scanf("%c", &option);
@@ -19,9 +20,15 @@ int main(void)
   case 'a':
     printf("Enter a value:");
     scanf("%d", &value);
-    Status status = add_to_end(list, value);
+    status = add_to_end(list, value);
+    display(list);
     break;
-
+  case 'b':
+    printf("Enter a value:");
+    scanf("%d", &value);
+    status = add_to_start(list, value);
+    display(list);
+    break;
   default:
     break;
   }
