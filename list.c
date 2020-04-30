@@ -9,41 +9,48 @@ List_ptr create_list(void)
   return list;
 }
 
-Status add_to_end(List_ptr list, int value)
+Node_ptr create_node(int value)
 {
   Node_ptr node = malloc(sizeof(Node));
   node->value = value;
   node->next = NULL;
+  return node;
+}
+
+List_ptr add_first_node(List_ptr list, Node_ptr node)
+{
+  list->head = node;
+  list->last = node;
+  return list;
+}
+
+Status add_to_end(List_ptr list, int value)
+{
+  Node_ptr node = create_node(value);
+  list->count = ++list->count;
   if (!list->head)
   {
-    list->head = node;
-    list->last = node;
+    add_first_node(list, node);
+    return Success;
   }
-  else
-  {
-    list->last->next = node;
-    list->last = node;
-  }
-  list->count = ++list->count;
+
+  list->last->next = node;
+  list->last = node;
   return Success;
 }
 
 Status add_to_start(List_ptr list, int value)
 {
-  Node_ptr node = malloc(sizeof(Node));
-  node->value = value;
-  node->next = NULL;
+  Node_ptr node = create_node(value);
+  list->count = ++list->count;
   if (list->head == NULL)
   {
-    list->head = node;
-    list->last = node;
+    add_first_node(list, node);
+    return Success;
   }
-  else
-  {
-    node->next = list->head;
-    list->head = node;
-  }
-  list->count = ++list->count;
+
+  node->next = list->head;
+  list->head = node;
   return Success;
 }
 

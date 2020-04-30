@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "list.h"
 
-void printOptions()
+void print_options()
 {
-  printf("(a) add a number to the end of the list\n(b) add a number to the start of the list\n(c) exit");
+  printf("(a) add a number to the end of the list\n(b) add a number to the start of the list\n(c)display list (d)exit\n");
+  printf("Please enter the alphabet of the operation you would like to perform\n");
 }
 
 int main(void)
@@ -12,7 +13,7 @@ int main(void)
   int value;
   Status status;
   List_ptr list = create_list();
-  printOptions();
+  print_options();
   scanf("%c", &option);
   while (1)
   {
@@ -23,20 +24,24 @@ int main(void)
       printf("Enter a value:");
       scanf("%d", &value);
       status = add_to_end(list, value);
-      display(list);
       break;
     case 'b':
       printf("Enter a value:");
       scanf("%d", &value);
       status = add_to_start(list, value);
-      display(list);
       break;
     case 'c':
+      display(list);
+      break;
+    case 'd':
       return 0;
+      break;
     default:
+      printf("Please enter valid option.\n\n");
       break;
     }
-    scanf("%c", &option);
+    print_options();
+    scanf(" %c", &option);
   }
 
   return 0;
