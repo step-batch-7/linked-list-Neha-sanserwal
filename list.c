@@ -33,15 +33,14 @@ Status add_to_start(List_ptr list, int value)
   Node_ptr node = malloc(sizeof(Node));
   node->value = value;
   node->next = NULL;
-  if (!list->head)
+  if (list->head == NULL)
   {
     list->head = node;
     list->last = node;
   }
   else
   {
-
-    list->head->next = node;
+    node->next = list->head;
     list->head = node;
   }
   list->count = ++list->count;
