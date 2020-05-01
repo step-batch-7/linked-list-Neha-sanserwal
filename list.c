@@ -63,7 +63,6 @@ Status add_to_start(List_ptr list, int value)
     list = add_first_node(list, node);
     return Success;
   }
-
   node->next = list->head;
   list->head = node;
   return Success;
@@ -90,7 +89,6 @@ Status remove_from_end(List_ptr list)
   {
     return Failure;
   }
-
   if (list->count == 1)
   {
     free(p_walk);
@@ -105,6 +103,28 @@ Status remove_from_end(List_ptr list)
   return Success;
 }
 
+Status remove_at(List_ptr list, int position)
+{
+  Node_ptr p_walk = list->head;
+  if (!list->head)
+  {
+    return Failure;
+  }
+  if (position == 1)
+  {
+    list->head = p_walk->next;
+    free(p_walk);
+    list->count = list->count - 1;
+    return Success;
+  }
+  walk_to(p_walk, 1, position);
+  Node_ptr temp = p_walk->next;
+  p_walk->next = p_walk->next->next;
+  free(temp);
+  list->count = list->count - 1;
+  return Success;
+}
+
 Status does_exist(int value, List_ptr list)
 {
   Node_ptr p_walk = list->head;
@@ -112,7 +132,6 @@ Status does_exist(int value, List_ptr list)
   {
     if (p_walk->value == value)
     {
-
       return Success;
     }
     p_walk = p_walk->next;

@@ -78,12 +78,16 @@ int main(void)
       status = remove_from_end(list);
       print_status(status, "Removing number from end ");
       break;
+    case 'g':
+      printf("Enter a position to remove:");
+      scanf("%d", &position);
+      status = remove_at(list, position);
+      break;
     case 'k':
       printf("Enter a value to search:");
       scanf("%d", &value);
       status = does_exist(value, list);
-      char *msg = "Finding number ";
-      print_status(status, msg);
+      print_status(status, "Finding number ");
       break;
     case 'l':
       display(list);
