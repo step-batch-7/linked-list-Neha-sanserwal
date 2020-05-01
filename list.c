@@ -96,7 +96,7 @@ Status remove_from_end(List_ptr list)
     list->count = list->count - 1;
     return Success;
   }
-  walk_to(p_walk, 2, list->count);
+  walk_to(p_walk, 1, list->count);
   free(p_walk->next);
   list->count = --list->count;
   list->last = p_walk;
@@ -110,7 +110,7 @@ Status remove_at(List_ptr list, int position)
   {
     return Failure;
   }
-  if (position == 1)
+  if (position == 0)
   {
     list->head = p_walk->next;
     free(p_walk);
@@ -129,7 +129,7 @@ int does_exist(int value, List_ptr list)
 {
   int count = -1;
   Node *p_walk = list->head;
-  for (int i = 1; i <= list->count; i++)
+  for (int i = 0; i < list->count; i++)
   {
     if (p_walk->value == value)
     {
@@ -155,7 +155,6 @@ Status insert_at(List_ptr list, int value, int position)
 {
   if (position == 0)
   {
-    printf(" hey hey %d", add_to_start(list, value));
     return add_to_start(list, value);
   }
   if (position > list->count)
@@ -204,11 +203,15 @@ Status remove_all_occurrences(List_ptr list, int value)
 {
 
   Status status = remove_first_occurrence(list, value);
+  if (!status)
+  {
+    return Failure;
+  }
   while (status)
   {
     status = remove_first_occurrence(list, value);
   }
-  return status;
+  return Success;
 }
 
 void display(List_ptr list)
