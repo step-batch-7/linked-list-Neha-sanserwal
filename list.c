@@ -125,18 +125,19 @@ Status remove_at(List_ptr list, int position)
   return Success;
 }
 
-Status does_exist(int value, List_ptr list)
+int does_exist(int value, List_ptr list)
 {
-  Node_ptr p_walk = list->head;
-  while (p_walk)
+  int count = -1;
+  Node *p_walk = list->head;
+  for (int i = 1; i <= list->count; i++)
   {
     if (p_walk->value == value)
     {
-      return Success;
+      return i;
     }
     p_walk = p_walk->next;
   }
-  return Failure;
+  return count;
 }
 
 Status add_unique(List_ptr list, int value)
@@ -170,15 +171,31 @@ Status insert_at(List_ptr list, int value, int position)
 
 Status clear_list(List_ptr list)
 {
-  Node_ptr p_walk = list->head;
-  while (!p_walk)
+
+  while (!list->head)
   {
-    Node_ptr temp = p_walk;
-    p_walk = p_walk->next;
-    free(temp);
+    Node_ptr p_walk = list->head;
+    list->head = p_walk->next;
+    free(p_walk);
     list->count = --list->count;
   }
   list = assign_head_and_tail(list, NULL);
+  return Success;
+}
+void destroy_list(List_ptr list)
+{
+  clear_list(list);
+  free(list);
+}
+
+Status remove_first_occurrence(List_ptr list, int value)
+{
+  int position = does_exist(value, list);
+  if (position == -1)
+  {
+    return Failure;
+  }
+  remove_at(list, position);
   return Success;
 }
 

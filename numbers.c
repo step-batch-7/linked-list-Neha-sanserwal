@@ -82,6 +82,13 @@ int main(void)
       printf("Enter a position to remove:");
       scanf("%d", &position);
       status = remove_at(list, position);
+      print_status(status, "Removing number ");
+      break;
+    case 'h':
+      printf("Enter a value");
+      scanf("%d", &value);
+      status = remove_first_occurrence(list, value);
+      print_status(status, "Removing first occurrence");
       break;
     case 'j':
       status = clear_list(list);
@@ -89,13 +96,22 @@ int main(void)
     case 'k':
       printf("Enter a value to search:");
       scanf("%d", &value);
-      status = does_exist(value, list);
-      print_status(status, "Finding number ");
+      int count = does_exist(value, list);
+      if (count == -1)
+      {
+        printf("Number don't exist.");
+      }
+      else
+      {
+        printf("Number found at %d", count);
+      }
+
       break;
     case 'l':
       display(list);
       break;
     case 'm':
+      destroy_list(list);
       return 0;
       break;
     default:
