@@ -1,10 +1,16 @@
 
 #include "list.h"
+List_ptr assign_head_and_tail(List_ptr list, Node_ptr ptr)
+{
+  list->head = ptr;
+  list->last = ptr;
+  return list;
+}
+
 List_ptr create_list(void)
 {
   List_ptr list = malloc(sizeof(List));
-  list->head = NULL;
-  list->last = NULL;
+  list = assign_head_and_tail(list, NULL);
   list->count = 0;
   return list;
 }
@@ -17,10 +23,18 @@ Node_ptr create_node(int value)
   return node;
 }
 
+Node_ptr walk_to(Node_ptr p_walk, int from, int position)
+{
+  for (int i = from; i < position; i++)
+  {
+    p_walk = p_walk->next;
+  }
+  return p_walk;
+}
+
 List_ptr add_first_node(List_ptr list, Node_ptr node)
 {
-  list->head = node;
-  list->last = node;
+  list = assign_head_and_tail(list, node);
   return list;
 }
 
@@ -61,7 +75,6 @@ Status remove_from_start(List_ptr list)
   {
     return Failure;
   }
-
   Node_ptr p_walk = list->head;
   list->head = p_walk->next;
   list->count = list->count - 1;
@@ -69,26 +82,25 @@ Status remove_from_start(List_ptr list)
   Status status = Success;
   return Success;
 }
+
 Status remove_from_end(List_ptr list)
 {
+  Node_ptr p_walk = list->head;
   if (!list->head)
   {
     return Failure;
   }
-  list->count = --list->count;
-  Node_ptr p_walk = list->head;
+
   if (list->count == 1)
   {
     free(p_walk);
-    list->head = NULL;
-    list->last = NULL;
+    list = assign_head_and_tail(list, NULL);
+    list->count = list->count - 1;
     return Success;
   }
-  while (!p_walk->next->next)
-  {
-    p_walk = p_walk->next;
-  }
+  walk_to(p_walk, 2, list->count);
   free(p_walk->next);
+  list->count = --list->count;
   list->last = p_walk;
   return Success;
 }
@@ -107,6 +119,7 @@ Status does_exist(int value, List_ptr list)
   }
   return Failure;
 }
+
 Status add_unique(List_ptr list, int value)
 {
   if (does_exist(value, list))
@@ -130,10 +143,7 @@ Status insert_at(List_ptr list, int value, int position)
   }
   Node_ptr p_walk = list->head;
   Node_ptr node = create_node(value);
-  for (int i = 2; i < position; i++)
-  {
-    p_walk = p_walk->next;
-  }
+  p_walk = walk_to(p_walk, 2, position);
   node->next = p_walk->next;
   p_walk->next = node;
   return Success;
@@ -141,7 +151,6 @@ Status insert_at(List_ptr list, int value, int position)
 
 void display(List_ptr list)
 {
-  printf("%d", list->count);
   Node_ptr p_walk = list->head;
   while (p_walk != NULL)
   {

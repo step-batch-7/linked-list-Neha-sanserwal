@@ -48,7 +48,8 @@ Status clear_list(List_ptr); // Removes all elements in the list
 
 void destroy_list(List_ptr); // Frees the elements and the list structure from memory
 List_ptr add_first_node(List_ptr list, Node_ptr node);
-
+Node_ptr walk_to(Node_ptr p_walk , int from, int position);
 Node_ptr create_node(int value);
+List_ptr assign_head_and_tail(List_ptr list, Node_ptr ptr);
 
 #endif
