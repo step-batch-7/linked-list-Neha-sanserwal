@@ -57,7 +57,6 @@ Status add_to_end(List_ptr list, int value)
 Status add_to_start(List_ptr list, int value)
 {
   Node_ptr node = create_node(value);
-  list->count = ++list->count;
   if (list->head == NULL)
   {
     list = add_first_node(list, node);
@@ -65,6 +64,7 @@ Status add_to_start(List_ptr list, int value)
   }
   node->next = list->head;
   list->head = node;
+  list->count = ++list->count;
   return Success;
 }
 
@@ -155,6 +155,7 @@ Status insert_at(List_ptr list, int value, int position)
 {
   if (position == 0)
   {
+    printf(" hey hey %d", add_to_start(list, value));
     return add_to_start(list, value);
   }
   if (position > list->count)
@@ -163,7 +164,7 @@ Status insert_at(List_ptr list, int value, int position)
   }
   Node_ptr p_walk = list->head;
   Node_ptr node = create_node(value);
-  p_walk = walk_to(p_walk, 2, position);
+  p_walk = walk_to(p_walk, 1, position);
   node->next = p_walk->next;
   p_walk->next = node;
   return Success;

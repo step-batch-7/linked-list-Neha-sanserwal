@@ -61,7 +61,7 @@ int main(void)
     case 'c':
       printf("Enter a value and position :");
       scanf("%d %d", &value, &position);
-      insert_at(list, value, position);
+      status = insert_at(list, value, position);
       print_status(status, "inserting number ");
       break;
     case 'd':
