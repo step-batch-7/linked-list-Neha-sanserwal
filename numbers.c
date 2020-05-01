@@ -39,7 +39,7 @@ int print_status(Status status, char *msg)
 int main(void)
 {
   char option;
-  int value;
+  int value, position;
   Status status;
   List_ptr list = create_list();
   print_options();
@@ -58,6 +58,12 @@ int main(void)
       scanf("%d", &value);
       add_to_start(list, value);
       break;
+    case 'c':
+      printf("Enter a value and position :");
+      scanf("%d %d", &value, &position);
+      insert_at(list, value, position);
+      print_status(status, "inserting number ");
+      break;
     case 'd':
       printf("Enter a unique value:");
       scanf("%d", &value);
@@ -70,7 +76,7 @@ int main(void)
       break;
     case 'f':
       status = remove_from_end(list);
-      print_status(status, "Removing number from start ");
+      print_status(status, "Removing number from end ");
       break;
     case 'k':
       printf("Enter a value to search:");

@@ -61,6 +61,7 @@ Status remove_from_start(List_ptr list)
   {
     return Failure;
   }
+
   Node_ptr p_walk = list->head;
   list->head = p_walk->next;
   list->count = list->count - 1;
@@ -74,6 +75,7 @@ Status remove_from_end(List_ptr list)
   {
     return Failure;
   }
+  list->count = --list->count;
   Node_ptr p_walk = list->head;
   if (list->count == 1)
   {
@@ -111,13 +113,35 @@ Status add_unique(List_ptr list, int value)
   {
     return Failure;
   }
+  list->count = ++list->count;
   add_to_end(list, value);
+  return Success;
+}
+
+Status insert_at(List_ptr list, int value, int position)
+{
+  if (position == 0)
+  {
+    return add_to_start(list, value);
+  }
+  if (position > list->count)
+  {
+    return add_to_end(list, value);
+  }
+  Node_ptr p_walk = list->head;
+  Node_ptr node = create_node(value);
+  for (int i = 2; i < position; i++)
+  {
+    p_walk = p_walk->next;
+  }
+  node->next = p_walk->next;
+  p_walk->next = node;
   return Success;
 }
 
 void display(List_ptr list)
 {
-
+  printf("%d", list->count);
   Node_ptr p_walk = list->head;
   while (p_walk != NULL)
   {
