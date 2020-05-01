@@ -105,6 +105,15 @@ Status does_exist(int value, List_ptr list)
   }
   return Failure;
 }
+Status add_unique(List_ptr list, int value)
+{
+  if (does_exist(value, list))
+  {
+    return Failure;
+  }
+  add_to_end(list, value);
+  return Success;
+}
 
 void display(List_ptr list)
 {
