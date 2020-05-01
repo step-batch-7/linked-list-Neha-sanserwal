@@ -1,5 +1,5 @@
-
 #include "list.h"
+
 List_ptr assign_head_and_tail(List_ptr list, Node_ptr ptr)
 {
   list->head = ptr;
@@ -120,7 +120,7 @@ Status remove_at(List_ptr list, int position)
   walk_to(p_walk, 1, position);
   Node_ptr temp = p_walk->next;
   p_walk->next = p_walk->next->next;
-  free(temp);
+  free(p_walk->next);
   list->count = list->count - 1;
   return Success;
 }
@@ -165,6 +165,20 @@ Status insert_at(List_ptr list, int value, int position)
   p_walk = walk_to(p_walk, 2, position);
   node->next = p_walk->next;
   p_walk->next = node;
+  return Success;
+}
+
+Status clear_list(List_ptr list)
+{
+  Node_ptr p_walk = list->head;
+  while (!p_walk)
+  {
+    Node_ptr temp = p_walk;
+    p_walk = p_walk->next;
+    free(temp);
+    list->count = --list->count;
+  }
+  list = assign_head_and_tail(list, NULL);
   return Success;
 }
 

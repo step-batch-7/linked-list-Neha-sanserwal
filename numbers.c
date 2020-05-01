@@ -83,6 +83,9 @@ int main(void)
       scanf("%d", &position);
       status = remove_at(list, position);
       break;
+    case 'j':
+      status = clear_list(list);
+      break;
     case 'k':
       printf("Enter a value to search:");
       scanf("%d", &value);
