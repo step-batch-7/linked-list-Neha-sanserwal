@@ -30,7 +30,8 @@ Status add_to_end(List_ptr list, int value)
   list->count = ++list->count;
   if (!list->head)
   {
-    add_first_node(list, node);
+
+    list = add_first_node(list, node);
     return Success;
   }
 
@@ -45,7 +46,7 @@ Status add_to_start(List_ptr list, int value)
   list->count = ++list->count;
   if (list->head == NULL)
   {
-    add_first_node(list, node);
+    list = add_first_node(list, node);
     return Success;
   }
 
@@ -67,13 +68,36 @@ Status remove_from_start(List_ptr list)
   Status status = Success;
   return Success;
 }
+Status remove_from_end(List_ptr list)
+{
+  if (!list->head)
+  {
+    return Failure;
+  }
+  Node_ptr p_walk = list->head;
+  if (list->count == 1)
+  {
+    free(p_walk);
+    list->head = NULL;
+    list->last = NULL;
+    return Success;
+  }
+  while (!p_walk->next->next)
+  {
+    p_walk = p_walk->next;
+  }
+  free(p_walk->next);
+  list->last = p_walk;
+  return Success;
+}
 
 void display(List_ptr list)
 {
+
   Node_ptr p_walk = list->head;
   while (p_walk != NULL)
   {
-    printf("%d\n", p_walk->value);
+    printf("%d \n", p_walk->value);
     p_walk = p_walk->next;
   }
 }
