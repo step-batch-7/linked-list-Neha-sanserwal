@@ -42,10 +42,11 @@ Status remove_at(List_ptr, int position);
 Status remove_first_occurrence(List_ptr, int value);
 Status remove_all_occurrences(List_ptr, int value);
 
+Status does_exist(int value, List_ptr list);
+
 Status clear_list(List_ptr); // Removes all elements in the list
 
 void destroy_list(List_ptr); // Frees the elements and the list structure from memory
-
 List_ptr add_first_node(List_ptr list, Node_ptr node);
 
 Node_ptr create_node(int value);

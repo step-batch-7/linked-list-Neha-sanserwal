@@ -91,6 +91,21 @@ Status remove_from_end(List_ptr list)
   return Success;
 }
 
+Status does_exist(int value, List_ptr list)
+{
+  Node_ptr p_walk = list->head;
+  while (p_walk)
+  {
+    if (p_walk->value == value)
+    {
+
+      return Success;
+    }
+    p_walk = p_walk->next;
+  }
+  return Failure;
+}
+
 void display(List_ptr list)
 {
 

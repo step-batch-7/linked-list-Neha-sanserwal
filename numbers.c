@@ -29,10 +29,10 @@ int print_status(Status status, char *msg)
 {
   if (status)
   {
-    printf("%s Successful\n", msg);
+    printf("%s was Successful\n", msg);
     return 0;
   }
-  printf("%s Failed\n", msg);
+  printf("%s was Failed\n", msg);
   return 0;
 }
 
@@ -60,11 +60,18 @@ int main(void)
       break;
     case 'e':
       status = remove_from_start(list);
-      print_status(status, "Removing number from start was ");
+      print_status(status, "Removing number from start ");
       break;
     case 'f':
       status = remove_from_end(list);
-      print_status(status, "Removing number from start was ");
+      print_status(status, "Removing number from start ");
+      break;
+    case 'k':
+      printf("Enter a value to search:");
+      scanf("%d", &value);
+      status = does_exist(value, list);
+      char *msg = "Finding number ";
+      print_status(status, msg);
       break;
     case 'l':
       display(list);
