@@ -85,10 +85,16 @@ int main(void)
       print_status(status, "Removing number ");
       break;
     case 'h':
-      printf("Enter a value");
+      printf("Enter a value: ");
       scanf("%d", &value);
       status = remove_first_occurrence(list, value);
       print_status(status, "Removing first occurrence");
+      break;
+    case 'i':
+      printf("Enter a value: ");
+      scanf("%d", &value);
+      status = remove_all_occurrences(list, value);
+      print_status(status, "Removing all occurrences");
       break;
     case 'j':
       status = clear_list(list);
