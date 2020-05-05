@@ -42,6 +42,10 @@ Status add_to_end(List_ptr list, int value)
 {
   Node_ptr node = create_node(value);
   list->count = ++list->count;
+  if (!list)
+  {
+    return Failure;
+  }
   if (!list->head)
   {
 
