@@ -157,11 +157,15 @@ Status add_unique(List_ptr list, int value)
 
 Status insert_at(List_ptr list, int value, int position)
 {
+  if (position > list->count)
+  {
+    return Failure;
+  }
   if (position == 0)
   {
     return add_to_start(list, value);
   }
-  if (position > list->count)
+  if (position == list->count)
   {
     return add_to_end(list, value);
   }
