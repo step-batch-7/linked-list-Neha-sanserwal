@@ -26,5 +26,7 @@ int main(void)
   test_remove_at();
   printf("\nadd_unique : \n");
   test_add_unique();
+  printf("\nclear_list : \n");
+  test_clear_list();
   return 0;
 }

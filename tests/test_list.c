@@ -90,3 +90,13 @@ void test_add_unique()
   actual = add_unique(sample_list, 2);
   assert("should add item if it is not already present", actual, Success);
 }
+
+void test_clear_list()
+{
+  List_ptr sample_list = create_list();
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 3);
+  Status actual = clear_list(sample_list);
+  assert("should clear list and set count to zero", actual, Success);
+}

@@ -181,16 +181,20 @@ Status insert_at(List_ptr list, int value, int position)
 
 Status clear_list(List_ptr list)
 {
-
-  while (!list->head)
+  while (list->count)
   {
     Node_ptr p_walk = list->head;
     list->head = p_walk->next;
     free(p_walk);
-    list->count = --list->count;
+    list->count = list->count - 1;
   }
   list = assign_head_and_tail(list, NULL);
-  return Success;
+  if (list->count == 0)
+  {
+
+    return Success;
+  }
+  return Failure;
 }
 void destroy_list(List_ptr list)
 {
