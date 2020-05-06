@@ -1,8 +1,36 @@
 #include "./test.h"
-void assert(char *msg, Status actual, Status expected)
+
+Status assert_lists(List_ptr actual, List_ptr expected)
 {
-  if (actual == expected)
+  if (!(actual->count == expected->count))
   {
+    printf("%d %d", actual->count, expected->count);
+    return Failure;
+  }
+  if (actual->count == expected->count && expected->count == 0)
+  {
+    return Success;
+  }
+  Node_ptr p_walkA = actual->head;
+  Node_ptr p_walkB = expected->head;
+  while (!p_walkB)
+  {
+    if (p_walkB->value != p_walkA->value)
+    {
+
+      return Failure;
+    }
+    p_walkB = p_walkB->next;
+    p_walkA = p_walkA->next;
+  }
+  return Success;
+}
+void assert(char *msg, Status status, List_ptr actual, List_ptr expected, Status expectedStatus)
+{
+
+  if (status == expectedStatus && assert_lists(actual, expected) == Success)
+  {
+
     printf("✅ %s\n", msg);
   }
   else

@@ -191,7 +191,6 @@ Status clear_list(List_ptr list)
   list = assign_head_and_tail(list, NULL);
   if (list->count == 0)
   {
-
     return Success;
   }
   return Failure;

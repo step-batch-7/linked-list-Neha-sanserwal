@@ -4,10 +4,11 @@
 #include "../list.h"
 
 
-void assert(char *msg, Status actual, Status expected);
+Status assert_lists(List_ptr actual, List_ptr expected);
+void assert(char *msg, Status status, List_ptr actual, List_ptr expected, Status expectedStatus);
 void test_add_to_end(void);
 void test_add_to_start(void);
-void test_insert_at(void);
+void test_insert_at(void); 
 void test_remove_from_start(void);
 void test_remove_from_end(void);
 void test_remove_at(void);
