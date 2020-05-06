@@ -1,3 +1,5 @@
 *.o
 numbers
 .vscode
+list
+a.out
