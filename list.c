@@ -83,7 +83,6 @@ Status remove_from_start(List_ptr list)
   list->head = p_walk->next;
   list->count = list->count - 1;
   free(p_walk);
-  Status status = Success;
   return Success;
 }
 

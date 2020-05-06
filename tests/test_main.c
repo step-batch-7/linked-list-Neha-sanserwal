@@ -18,5 +18,7 @@ int main(void)
   test_add_to_start();
   printf("\nInsert_at : \n");
   test_insert_at();
+  printf("\nremove_from_start : \n");
+  test_remove_from_start();
   return 0;
 }
