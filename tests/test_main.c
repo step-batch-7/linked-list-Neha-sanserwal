@@ -22,5 +22,7 @@ int main(void)
   test_remove_from_start();
   printf("\nremove_from_end : \n");
   test_remove_from_end();
+  printf("\nremove_at : \n");
+  test_remove_at();
   return 0;
 }

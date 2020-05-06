@@ -100,36 +100,34 @@ Status remove_from_end(List_ptr list)
     list->count = list->count - 1;
     return Success;
   }
-  walk_to(p_walk, 1, list->count);
-  free(p_walk->next);
-  list->count = --list->count;
+  walk_to(p_walk, 2, list->count);
+
   list->last = p_walk;
+  free(p_walk->next);
+  --list->count;
   return Success;
 }
 
 Status remove_at(List_ptr list, int position)
 {
-  if (position > list->count - 1 || position < 0)
+  Node_ptr p_walk = list->head;
+  if (position > list->count - 1 || position < 0 || !p_walk)
   {
     return Failure;
   }
-  Node_ptr p_walk = list->head;
-  if (!p_walk)
+  if (position == list->count - 1)
   {
-    return Failure;
+    return remove_from_end(list);
   }
   if (position == 0)
   {
-    list->head = p_walk->next;
-    free(p_walk);
-    list->count = list->count - 1;
-    return Success;
+    return remove_from_start(list);
   }
-  walk_to(p_walk, 1, position);
+  walk_to(p_walk, 0, position);
   Node_ptr temp = p_walk->next;
-  p_walk->next = p_walk->next->next;
-  free(p_walk->next);
-  list->count = list->count - 1;
+  p_walk->next = temp->next;
+  free(temp);
+  --list->count;
   return Success;
 }
 
@@ -150,11 +148,11 @@ int does_exist(int value, List_ptr list)
 
 Status add_unique(List_ptr list, int value)
 {
-  if (does_exist(value, list))
+  if (does_exist(value, list) != -1)
   {
     return Failure;
   }
-  list->count = ++list->count;
+  ++list->count;
   add_to_end(list, value);
   return Success;
 }
