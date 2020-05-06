@@ -152,7 +152,6 @@ Status add_unique(List_ptr list, int value)
   {
     return Failure;
   }
-  ++list->count;
   add_to_end(list, value);
   return Success;
 }

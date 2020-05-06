@@ -24,5 +24,7 @@ int main(void)
   test_remove_from_end();
   printf("\nremove_at : \n");
   test_remove_at();
+  printf("\nadd_unique : \n");
+  test_add_unique();
   return 0;
 }

@@ -73,7 +73,20 @@ void test_remove_at()
   assert("should remove element from middle", actual, Success);
   actual = remove_at(sample_list, 1);
   assert("should remove element from last", actual, Success);
+  destroy_list(sample_list);
   sample_list = create_list();
   actual = remove_at(sample_list, 1);
-  assert("should not remove element if list count is zero", actual, Failure);
+  assert("should not remove element if position is invalid", actual, Failure);
+}
+
+void test_add_unique()
+{
+  List_ptr sample_list = create_list();
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 3);
+  Status actual = add_unique(sample_list, 1);
+  assert("should not add item if it is already present", actual, Failure);
+  actual = add_unique(sample_list, 2);
+  assert("should add item if it is not already present", actual, Success);
 }
