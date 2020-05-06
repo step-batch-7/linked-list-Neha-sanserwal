@@ -20,5 +20,7 @@ int main(void)
   test_insert_at();
   printf("\nremove_from_start : \n");
   test_remove_from_start();
+  printf("\nremove_from_end : \n");
+  test_remove_from_end();
   return 0;
 }
