@@ -100,8 +100,21 @@ void test_clear_list()
   Status actual = clear_list(sample_list);
   assert("should clear list and set count to zero.", actual, Success);
 }
+void test_remove_first_occurrence()
+{
+  List_ptr sample_list = create_list();
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 2);
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 3);
+  add_to_end(sample_list, 1);
+  Status actual = remove_all_occurrences(sample_list, 1);
+  assert("should remove first of item in list if present.", actual, Success);
+  actual = remove_all_occurrences(sample_list, 4);
+  assert("should give failure if item is not present.", actual, Failure);
+}
 
-void test_remove_all_occurrence()
+void test_remove_all_occurrences()
 {
   List_ptr sample_list = create_list();
   add_to_end(sample_list, 1);
