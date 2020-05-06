@@ -41,7 +41,6 @@ List_ptr add_first_node(List_ptr list, Node_ptr node)
 Status add_to_end(List_ptr list, int value)
 {
   Node_ptr node = create_node(value);
-  list->count = ++list->count;
   if (!list)
   {
     return Failure;
@@ -50,11 +49,12 @@ Status add_to_end(List_ptr list, int value)
   {
 
     list = add_first_node(list, node);
+    ++list->count;
     return Success;
   }
-
   list->last->next = node;
   list->last = node;
+  ++list->count;
   return Success;
 }
 
@@ -64,11 +64,12 @@ Status add_to_start(List_ptr list, int value)
   if (list->head == NULL)
   {
     list = add_first_node(list, node);
+    ++list->count;
     return Success;
   }
   node->next = list->head;
   list->head = node;
-  list->count = ++list->count;
+  ++list->count;
   return Success;
 }
 
@@ -161,7 +162,7 @@ Status add_unique(List_ptr list, int value)
 
 Status insert_at(List_ptr list, int value, int position)
 {
-  if (position > list->count)
+  if (position > list->count || position < 0)
   {
     return Failure;
   }
@@ -178,6 +179,7 @@ Status insert_at(List_ptr list, int value, int position)
   p_walk = walk_to(p_walk, 1, position);
   node->next = p_walk->next;
   p_walk->next = node;
+  ++list->count;
   return Success;
 }
 
@@ -211,6 +213,7 @@ Status remove_first_occurrence(List_ptr list, int value)
 
   return Success;
 }
+
 Status remove_all_occurrences(List_ptr list, int value)
 {
 

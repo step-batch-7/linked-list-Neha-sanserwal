@@ -5,8 +5,8 @@
 
 
 void assert(char *msg, Status actual, Status expected);
-void test_add_to_end(List *sample_list);
-
-
+void test_add_to_end(void);
+void test_add_to_start(void);
+void test_insert_at(void);
 #endif // __test_h__
 
