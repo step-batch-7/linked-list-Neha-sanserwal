@@ -68,15 +68,15 @@ void test_remove_at()
   add_to_end(sample_list, 3);
   add_to_end(sample_list, 4);
   Status actual = remove_at(sample_list, 0);
-  assert("should remove element if position is 0", actual, Success);
+  assert("should remove element if position is 0.", actual, Success);
   actual = remove_at(sample_list, 1);
-  assert("should remove element from middle", actual, Success);
+  assert("should remove element from middle.", actual, Success);
   actual = remove_at(sample_list, 1);
-  assert("should remove element from last", actual, Success);
+  assert("should remove element from last.", actual, Success);
   destroy_list(sample_list);
   sample_list = create_list();
   actual = remove_at(sample_list, 1);
-  assert("should not remove element if position is invalid", actual, Failure);
+  assert("should not remove element if position is invalid.", actual, Failure);
 }
 
 void test_add_unique()
@@ -86,9 +86,9 @@ void test_add_unique()
   add_to_end(sample_list, 1);
   add_to_end(sample_list, 3);
   Status actual = add_unique(sample_list, 1);
-  assert("should not add item if it is already present", actual, Failure);
+  assert("should not add item if it is already present.", actual, Failure);
   actual = add_unique(sample_list, 2);
-  assert("should add item if it is not already present", actual, Success);
+  assert("should add item if it is not already present.", actual, Success);
 }
 
 void test_clear_list()
@@ -98,5 +98,19 @@ void test_clear_list()
   add_to_end(sample_list, 1);
   add_to_end(sample_list, 3);
   Status actual = clear_list(sample_list);
-  assert("should clear list and set count to zero", actual, Success);
+  assert("should clear list and set count to zero.", actual, Success);
+}
+
+void test_remove_all_occurrence()
+{
+  List_ptr sample_list = create_list();
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 2);
+  add_to_end(sample_list, 1);
+  add_to_end(sample_list, 3);
+  add_to_end(sample_list, 1);
+  Status actual = remove_all_occurrences(sample_list, 1);
+  assert("should remove all occurrences of item in list if present.", actual, Success);
+  actual = remove_all_occurrences(sample_list, 1);
+  assert("should give failure if item is not present.", actual, Failure);
 }

@@ -13,5 +13,6 @@ void test_remove_from_end(void);
 void test_remove_at(void);
 void test_add_unique(void);
 void test_clear_list(void);
+void test_remove_all_occurrence(void);
 #endif // __test_h__
 

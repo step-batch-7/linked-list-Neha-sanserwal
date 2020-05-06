@@ -28,5 +28,7 @@ int main(void)
   test_add_unique();
   printf("\nclear_list : \n");
   test_clear_list();
+  printf("\nremove_all_occurrences : \n");
+  test_remove_all_occurrence();
   return 0;
 }
